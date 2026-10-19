@@ -13,7 +13,7 @@ Live: https://menaammarpro.github.io/love-budget/
 - **Add an entry** — expense or income, amount, category (with suggestions),
   who paid (Ammar / Mena / both), date and an optional note.
 - **Monthly summary** — income, spent and balance for the chosen month, with a
-  month picker.
+  month picker and a "roughly … a day" line.
 - **Who paid what** — totals split between Ammar, Mena and shared.
 - **Where it went** — CSS bars per category, biggest first, with percentages.
 - **Currency** — Pakistan Rupee (₨), Romanian Leu (lei), Euro (€) or US Dollar
