@@ -162,6 +162,14 @@ main {
 
 .summary-num.balance { color: var(--pink); }
 
+.per-day {
+  margin: 12px auto 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.per-day strong { color: var(--text); }
+
 .sub-heading {
   margin: 34px 0 0;
   font-size: 1.05rem;
