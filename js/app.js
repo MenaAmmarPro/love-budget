@@ -147,6 +147,20 @@
     return rows;
   }
 
+  function daysInMonth(key) {
+    var parts = String(key || "").split("-");
+    var month = Number(parts[1]);
+    if (!parts[0] || !month) return 30;
+    return new Date(Number(parts[0]), month, 0).getDate();
+  }
+
+  function perDay(entries, key) {
+    var today = dayISO();
+    var spent = summarize(filterByMonth(entries, key)).expense;
+    var days = (key === monthKey(today)) ? asDate(today).getDate() : daysInMonth(key);
+    return days > 0 ? round2(spent / days) : 0;
+  }
+
   function byPerson(entries) {
     var out = { ammar: 0, mena: 0, both: 0 };
     (entries || []).forEach(function (e) {
@@ -303,6 +317,8 @@
     summarize: summarize,
     byCategory: byCategory,
     byPerson: byPerson,
+    daysInMonth: daysInMonth,
+    perDay: perDay,
     sortEntries: sortEntries,
     toCSV: toCSV,
     cleanEntry: cleanEntry,
@@ -371,6 +387,7 @@
     setText("split-ammar", formatMoney(split.ammar, cur));
     setText("split-mena", formatMoney(split.mena, cur));
     setText("split-both", formatMoney(split.both, cur));
+    setText("per-day", formatMoney(perDay(state.entries, viewMonth), cur));
 
     var bars = $("category-bars");
     if (bars) {
