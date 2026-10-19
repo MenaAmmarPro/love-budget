@@ -86,7 +86,8 @@
       text = String(value);
     }
     var symbol = currencySymbol(code);
-    return /^[A-Z]{3}$/.test(symbol) ? text + " " + symbol : symbol + text;
+    // Word-like symbols ("lei") go after the number; glyph symbols (₨, €, $) before it.
+    return /^[A-Za-z]{2,4}$/.test(symbol) ? text + " " + symbol : symbol + text;
   }
 
   function whoLabel(id) {
