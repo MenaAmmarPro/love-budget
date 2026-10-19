@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Our Budget — for Mena">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#1a1d43"/>
+      <stop offset="100%" stop-color="#090b20"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#bg)"/>
+  <path d="M32 50s-16-9.8-21.3-19.6C6.9 23.4 10.7 15.7 18.2 15.7c4.3 0 7.3 2.2 9.2 4.9l4.6 6.2 4.6-6.2c1.9-2.7 4.9-4.9 9.2-4.9 7.5 0 11.3 7.7 7.5 14.7C48 39.2 32 50 32 50z" fill="#ff9fcf"/>
+  <circle cx="32" cy="33" r="7.5" fill="#090b20" opacity="0.55"/>
+  <text x="32" y="37.4" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#ffd76f">&#8377;</text>
+  <circle cx="49" cy="15" r="2.4" fill="#bba6ff"/>
+  <circle cx="14" cy="44" r="1.8" fill="#ff72b8"/>
+</svg>
