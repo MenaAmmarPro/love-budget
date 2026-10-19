@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b20">
+  <meta name="description" content="Our Budget — a shared money tracker for Mena and Ammar: income, expenses, monthly totals and who paid what.">
+  <title>Our Budget ✦ Love for Mena</title>
+  <link rel="canonical" href="https://menaammarpro.github.io/love-budget/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Our Budget — for Mena">
+  <meta property="og:title" content="Our Budget ✦ Love for Mena">
+  <meta property="og:description" content="A shared money tracker for the two of us — income, expenses and who paid what.">
+  <meta property="og:url" content="https://menaammarpro.github.io/love-budget/">
+  <meta property="og:image" content="https://menaammarpro.github.io/love-budget/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Our Budget — a shared money tracker">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Our Budget ✦ Love for Mena">
+  <meta name="twitter:description" content="A shared money tracker for the two of us — income, expenses and who paid what.">
+  <meta name="twitter:image" content="https://menaammarpro.github.io/love-budget/assets/og-image.png">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script src="js/theme-main.js" defer></script>
+  <script src="js/effects.js" defer></script>
+  <script src="js/app.js" defer></script>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Our Budget">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png">
+</head>
+<body>
+  <canvas id="starfield" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">♥ Our Budget</a>
+    <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">Menu</button>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a class="active" href="index.html">Home</a>
+      <a href="#add">Add</a>
+      <a href="#summary">Summary</a>
+      <a href="#entries">Entries</a>
+      <a href="#details">Details</a>
+      <a href="https://menaammarpro.github.io/loveformymena/">Our little universe ↗</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle color theme">Theme</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero budget-hero">
+      <p class="eyebrow">MONEY, TOGETHER</p>
+      <div class="moon" aria-hidden="true">₨</div>
+      <p class="small-caption">Every little thing we share, counted.</p>
+      <h1>Our <span>budget.</span></h1>
+      <p class="hero-description">
+        The money we spend on each other and on us — income in, expenses out,
+        added up by month and split by who paid. Kept only on this device,
+        just for the two of us.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#add">Add an entry <span>♥</span></a>
+        <a class="button button-ghost" href="#summary">See this month</a>
+      </div>
+      <p class="signature">Made with love, just for you <span>♥</span></p>
+    </section>
+
+    <section class="section" id="add">
+      <p class="eyebrow">A NEW LINE</p>
+      <h2>Add an <span>entry.</span></h2>
+      <div class="budget-form">
+        <div class="budget-row">
+          <label class="field">
+            <span>Kind</span>
+            <select id="entry-kind" aria-label="Income or expense">
+              <option value="expense">Expense</option>
+              <option value="income">Income</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Amount</span>
+            <input id="entry-amount" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" aria-label="Amount">
+          </label>
+          <label class="field">
+            <span>Currency</span>
+            <select id="entry-currency" aria-label="Currency"></select>
+          </label>
+        </div>
+        <div class="budget-row">
+          <label class="field">
+            <span>Category</span>
+            <input id="entry-category" list="category-list" maxlength="40" placeholder="Food, travel, gifts…" aria-label="Category">
+            <datalist id="category-list"></datalist>
+          </label>
+          <label class="field">
+            <span>Who paid</span>
+            <select id="entry-who" aria-label="Who paid">
+              <option value="both">Both of us</option>
+              <option value="ammar">Ammar</option>
+              <option value="mena">Mena</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Date</span>
+            <input id="entry-date" type="date" aria-label="Date">
+          </label>
+        </div>
+        <label class="field">
+          <span>Note</span>
+          <input id="entry-note" maxlength="120" placeholder="A little note (optional)" aria-label="Note">
+        </label>
+        <button class="button button-primary" id="add-entry" type="button">Add to our budget <span>♥</span></button>
+      </div>
+      <p class="section-note" id="add-note" aria-live="polite"></p>
+    </section>
+
+    <section class="section" id="summary">
+      <p class="eyebrow" id="summary-month">THIS MONTH</p>
+      <h2>This <span>month.</span></h2>
+      <div class="budget-meta">
+        <span class="budget-chip"><strong id="month-label">—</strong></span>
+        <label class="budget-chip budget-chip-select">
+          <span>Month</span>
+          <select id="month-select" aria-label="Choose month"></select>
+        </label>
+      </div>
+      <div class="summary-grid">
+        <div class="summary-card">
+          <span class="summary-label">Income</span>
+          <span class="summary-num income" id="sum-income">0</span>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Spent</span>
+          <span class="summary-num expense" id="sum-expense">0</span>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Balance</span>
+          <span class="summary-num balance" id="sum-balance">0</span>
+        </div>
+      </div>
+
+      <h3 class="sub-heading">Who paid what</h3>
+      <div class="split-grid">
+        <div class="split-card" data-who="ammar">
+          <span class="split-name">Ammar</span>
+          <span class="split-num" id="split-ammar">0</span>
+        </div>
+        <div class="split-card" data-who="mena">
+          <span class="split-name">Mena</span>
+          <span class="split-num" id="split-mena">0</span>
+        </div>
+        <div class="split-card" data-who="both">
+          <span class="split-name">Both of us</span>
+          <span class="split-num" id="split-both">0</span>
+        </div>
+      </div>
+
+      <h3 class="sub-heading">Where it went</h3>
+      <div class="bars" id="category-bars"></div>
+    </section>
+
+    <section class="section" id="entries">
+      <p class="eyebrow">EVERY LINE SO FAR</p>
+      <h2>All our <span>entries.</span></h2>
+      <div class="budget-meta">
+        <span class="budget-chip"><strong id="entry-count">0</strong> entries</span>
+        <label class="budget-chip budget-chip-select">
+          <span>Show</span>
+          <select id="filter-kind" aria-label="Filter by kind">
+            <option value="all">Everything</option>
+            <option value="income">Income only</option>
+            <option value="expense">Expenses only</option>
+          </select>
+        </label>
+      </div>
+      <div class="entry-list" id="entry-list"></div>
+      <button class="button button-ghost" id="export-csv" type="button">Export CSV</button>
+      <button class="button button-ghost" id="export-json" type="button">Export JSON</button>
+    </section>
+
+    <section class="section" id="details">
+      <p class="eyebrow">JUST FOR US</p>
+      <h2>Details.</h2>
+      <div class="settings-actions">
+        <label class="budget-chip budget-chip-select">
+          <span>Currency</span>
+          <select id="currency-select" aria-label="Currency"></select>
+        </label>
+        <label class="button button-ghost import-label" for="import-file">Import JSON</label>
+        <input id="import-file" type="file" accept="application/json,.json" hidden>
+        <button class="button button-ghost" id="share-button" type="button">Share this page</button>
+        <button class="button button-ghost" id="reset-budget" type="button">Empty the budget</button>
+      </div>
+      <p class="settings-note" id="save-note" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Made with care <span>♥</span> for Mena</p>
+    <p class="footer-small">A little universe of its own ✦</p>
+  </footer>
+</body>
+</html>
