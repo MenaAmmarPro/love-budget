@@ -107,6 +107,15 @@ assert(cats[0].category === "Food" && cats[0].total === 40, "biggest category fi
 assert(cats[1].category === "Travel" && cats[1].total === 20, "second category");
 assert(Math.abs(cats[0].pct - 66.7) < 0.1, "category percentage of spend");
 
+/* ---------------- days / per-day ---------------- */
+assert(NS.daysInMonth("2026-10") === 31, "daysInMonth October = 31");
+assert(NS.daysInMonth("2026-02") === 28, "daysInMonth February 2026 = 28");
+assert(NS.daysInMonth("bad") === 30, "daysInMonth falls back to 30");
+
+/* 2026-09 is a completed month: 5 / 30 days = 0.17. */
+assert(NS.perDay(entries, "2026-09") === 0.17, "perDay spreads spend over the month");
+assert(NS.perDay(entries, "2026-08") === 0, "perDay is zero for an empty month");
+
 /* ---------------- split ---------------- */
 const split = NS.byPerson(october);
 assert(split.ammar === 30, "Ammar's share of October spend");
